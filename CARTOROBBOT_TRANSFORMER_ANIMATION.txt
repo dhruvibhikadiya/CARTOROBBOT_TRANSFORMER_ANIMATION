@@ -1,0 +1,173 @@
+import simplegui
+import random
+flag=0
+flag1=0
+v=0
+vr=0
+vx=0
+vy=0
+n=0
+clr=['red','green']
+x=0
+xx=0
+yy=0
+r=0
+xx1=0
+yy1=0
+vx1=0
+vy1=0
+r1=0
+vr1=0
+cx=0
+cy=0
+cvx=0
+cvy=0
+nx=0
+nvx=0
+ny=0
+nvy=0
+sx=0
+sy=0
+svx=0
+svy=0
+xx2=0
+yy2=0
+vx2=0
+vy2=0
+lx=0
+ly=0
+lvx=0
+lvy=0
+def draw(canvas):
+    global flag,flag1,n,v,x,vr,vx,vy,xx,yy,r,xx1,yy1,vx1,vy1,r1,vr1,cx,cy,cvx,cvy,nx,nvx,ny,nvy,sx,sy,svy,svx,xx2,yy2,vx2,vy2,lx,ly,lvx,lvy
+    #star
+    for i in range(2):
+        x1=random.randint(0,600)
+        y1=random.randint(0,400)
+        canvas.draw_circle([x1,y1],2,1,'white','white')
+    
+    #road
+    canvas.draw_polygon([[0,330],[600,330],[600,400],[0,400]],1,'gray','gray')
+    
+    #moon
+    canvas.draw_circle([500,70],55,1,'white','white')
+    canvas.draw_circle([525,45],45,1,'black','black')
+    
+    #signal board
+    canvas.draw_line([570,330],[570,230],8,'white')
+    canvas.draw_polygon([[550,230],[590,230],[590,120],[550,120]],1,'white','yellow')
+    for i in range(140,211,35):
+        for j in range(569,570):
+            canvas.draw_circle([j,i],15,1,'blue',clr[n])
+    
+    #car
+    if flag1==1:
+        canvas.draw_line([242.5-x,225],[212.5-x,260],10,'red')
+        canvas.draw_line([357.5-x,225],[387.5-x,260],10,'red')
+    if flag1==1:
+        if flag==1:
+            canvas.draw_polyline([[300-x,102.5],[320-x,90],[310-x,70],[325-x,65],[317-x,57]],1,'white')
+            canvas.draw_polyline([[300-x,102.5],[280-x,90],[290-x,70],[275-x,65],[283-x,57]],1,'white')
+            canvas.draw_polyline([[300-x,102.5],[295-x,90],[305-x,70],[295-x,62],[300-x,55]],1,'white')
+    if flag==1:
+        if flag1==0:
+            canvas.draw_polygon([[180-x,290],[0-x,330],[0-x,250]],1,'yellow','yellow')
+    
+    canvas.draw_circle([180-x+cx,290-cy],5,1,'red','red')
+    canvas.draw_polygon([[180-x+xx1,310+yy1-r1],[420-x-xx1,310+yy1-r1],[420-x-xx1,275-yy1-r1],[180-x+xx1,275-yy1-r1]],1,'white','yellow')
+    canvas.draw_circle([250-x+xx,310-yy],20-r,2,'white','black')
+    canvas.draw_circle([350-x-xx,310-yy],20-r,2,'white','black')
+    canvas.draw_polygon([[375-x-sx,245+sy],[225-x+sx,245+sy],[260-x-sx,215+sy/4],[340-x+sx,215+sy/4]],1,'white','yellow')
+    canvas.draw_polygon([[180-x+nx,270-ny],[420-x-nx,270-ny],[420-x-nx,275],[180-x+nx,275]],1,'white','white')
+    canvas.draw_polygon([[180-x+xx2,270-yy2],[420-x-xx2,270-yy2],[375-x-xx2/2,245-yy2],[225-x+xx2/2,245-yy2]],1,'white','yellow')
+    canvas.draw_polygon([[265-x,220+ly],[295-x,220+ly],[295-x,240+1.6*ly],[240-x,240+1.6*ly]],1,'red','red')
+    canvas.draw_polygon([[335-x,220+ly],[305-x,220+ly],[305-x,240+1.6*ly],[360-x,240+1.6*ly]],1,'red','red')
+    if flag==1:
+        x+=v
+        if x>=175:
+            v=0
+    if flag1==1:
+        xx+=vx
+        yy+=vy
+        r+=vr
+        xx1+=vx1
+        yy1+=vy1
+        r1+=vr1
+        cx+=cvx
+        cy+=cvy
+        nx+=nvx
+        nx+=nvx
+        ny+=nvy
+        sx+=svx
+        sy+=svy
+        xx2+=vx2
+        yy2+=vy2
+        lx+=lvx
+        ly+=lvy
+        if r>=15:
+            vr=0
+        if yy>=185:
+            vy=0
+        if xx>=25:
+            vx=0
+        if xx1>=70:
+            vx1=0
+        if yy1>=20:
+            vy1=0
+        if r1>=152.5:
+            vr1=0
+        if cx>=120:
+            cvx=0
+        if cy>=187.5:
+            cvy=0
+        if nx>=115:
+            nvx=0
+        if ny>=92.5:
+            nvy=0
+        if sx>=17.5:
+            svx=0
+        if sy>=40:
+            svy=0
+        if xx2>=62.5:
+            vx2=0
+        if yy2>=45:
+            vy2=0
+        if lx>=0:
+            lvx=0
+        if ly>=55:
+            lvy=0
+                
+#start button
+def start():
+    global flag,n,v
+    flag=not flag
+    n=not n
+    v=0.2
+#transformer
+def transform():
+    global xx,yy,vr,vx,vy,r,flag1,xx1,yy1,vx1,vy1,r1,vr1,cx,cy,cvy,cvx,nx,nvx,ny,nvy,sx,sy,svx,svy,xx2,yy2,vx2,vy2,lx,ly,lvx,lvy
+    flag1=1
+    vr=0.1
+    vy=0.5
+    vx=0.5
+    vx1=0.5
+    vy1=0.5
+    vr1=0.5
+    cvy=0.5
+    cvx=0.5
+    nvx=0.5
+    nvy=0.5
+    svx=0.5
+    svy=0.5
+    vx2=0.5
+    vy2=0.5
+    lvx=0
+    lvy=0.5
+   
+    
+        
+frame=simplegui.create_frame('dhruvi',600,400)
+frame.start()
+frame.set_draw_handler(draw)
+frame.add_button("start",start)
+frame.add_button("tranformer",transform)
